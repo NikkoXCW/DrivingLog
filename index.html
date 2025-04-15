@@ -39,24 +39,16 @@
       try {
         const response = await fetch("https://script.google.com/macros/s/AKfycbzb77zOk9wCPw5GD2s2qa4A2gu617GDYztRW6c0Unic12wukVYCT40RVtcWeZF_ceU/exec", {
           method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
+          body: params,
         });
 
-        const result = await response.text();
-        console.log("Response from server:", result);
-        
-        if (response.ok && result.includes("Success")) {
-          status.innerText = "Submitted successfully!";
-          form.reset();
-        } else {
-          throw new Error(result);
-        }
+        const text = await response.text();
+        console.log("Response:", text);
+        status.innerText = "Submitted successfully!";
+        form.reset();
       } catch (error) {
-        status.innerText = "Submission failed. See console for error.";
-        console.error("Error:", error.message);
+        console.error("Submission error:", error);
+        status.innerText = "Submission failed.";
       }
     });
   </script>
