@@ -2,13 +2,20 @@
 <html>
 <head>
   <title>Driving Log - Volvo BEV</title>
+  <meta charset="UTF-8">
 </head>
 <body>
   <h2>Submit Your Info</h2>
-  <form id="myForm">
-    <input type="text" name="name" placeholder="Name"><br><br>
-    <input type="text" name="email" placeholder="Email"><br><br>
-    <input type="text" name="message" placeholder="Message"><br><br>
+  <form id="form">
+    <label>Name (text):</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Birthdate (date):</label><br>
+    <input type="date" name="birthdate" required><br><br>
+
+    <label>Score (number):</label><br>
+    <input type="number" name="score" required><br><br>
+
     <button type="submit">Submit</button>
   </form>
 
@@ -28,7 +35,7 @@
       status.innerText = "Submitting...";
 
       try {
-        const response = await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwa8XFc_8QA5iG6Ll-yKMl9fIiv9SLuuVlhgTkYSmikLXeG4oFFHD7Lih0laAEp6LBv/exec", {
           method: "POST",
           body: JSON.stringify(data),
           headers: {
