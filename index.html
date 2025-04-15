@@ -32,6 +32,8 @@
       const data = {};
       formData.forEach((value, key) => (data[key] = value));
 
+      console.log("Sending data:", data);
+
       status.innerText = "Submitting...";
 
       try {
@@ -44,11 +46,17 @@
         });
 
         const result = await response.text();
-        status.innerText = "Submitted successfully!";
-        form.reset();
+        console.log("Response from server:", result);
+        
+        if (response.ok && result.includes("Success")) {
+          status.innerText = "Submitted successfully!";
+          form.reset();
+        } else {
+          throw new Error(result);
+        }
       } catch (error) {
-        status.innerText = "Submission failed. Try again.";
-        console.error(error);
+        status.innerText = "Submission failed. See console for error.";
+        console.error("Error:", error.message);
       }
     });
   </script>
