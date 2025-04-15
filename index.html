@@ -1,20 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Driving Log - Volvo BEV</title>
+  <title>Driving Log - Nikola V13</title>
   <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2, h3 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+    .section {
+      margin-bottom: 30px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: #f9f9f9;
+    }
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .form-group {
+      flex: 1 1 45%;
+      min-width: 200px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 5px;
+      margin-top: 4px;
+      margin-bottom: 12px;
+      border: 1px solid #aaa;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007BFF;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #status {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h2>Submit Your Info</h2>
+
+  <h2>Driving Log Entry - Nikola V13</h2>
   <form id="form">
-    <label>Name (text):</label><br>
-    <input type="text" name="name" required><br><br>
 
-    <label>Birthdate (date):</label><br>
-    <input type="date" name="birthdate" required><br><br>
+    <div class="section">
+      <h3>Trip Overview</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Date:</label>
+          <input type="date" name="Date" required>
+        </div>
+        <div class="form-group">
+          <label>Driver Name:</label>
+          <input type="text" name="driverName" required>
+        </div>
+        <div class="form-group">
+          <label>Route:</label>
+          <input type="text" name="route" required>
+        </div>
+        <div class="form-group">
+          <label>Road Conditions:</label>
+          <input type="text" name="roadConditions">
+        </div>
+        <div class="form-group">
+          <label>Distance Travelled (km):</label>
+          <input type="number" name="distanceTravelled">
+        </div>
+        <div class="form-group">
+          <label>Trailer Type:</label>
+          <input type="text" name="trailerType">
+        </div>
+        <div class="form-group">
+          <label>Cargo Weight (kg):</label>
+          <input type="number" name="cargoWeight">
+        </div>
+        <div class="form-group" style="flex: 1 1 100%;">
+          <label>Cargo Description:</label>
+          <input type="text" name="cargoDescription">
+        </div>
+      </div>
+    </div>
 
-    <label>Score (number):</label><br>
-    <input type="number" name="score" required><br><br>
+    <div class="section">
+      <h3>Trip Start</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Start Temp (°C):</label>
+          <input type="number" name="startTemp">
+        </div>
+        <div class="form-group">
+          <label>Start Time:</label>
+          <input type="time" name="startTime">
+        </div>
+        <div class="form-group">
+          <label>Start Odometer (km):</label>
+          <input type="number" name="startOdometer">
+        </div>
+        <div class="form-group">
+          <label>Start Battery SoC (%):</label>
+          <input type="number" name="startSoc">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Trip End</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>End Temp (°C):</label>
+          <input type="number" name="endTemp">
+        </div>
+        <div class="form-group">
+          <label>End Time:</label>
+          <input type="time" name="endTime">
+        </div>
+        <div class="form-group">
+          <label>End Odometer (km):</label>
+          <input type="number" name="endOdometer">
+        </div>
+        <div class="form-group">
+          <label>End Battery SoC (%):</label>
+          <input type="number" name="endSoc">
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Notes</h3>
+      <label>Additional Notes:</label>
+      <textarea name="notes" rows="5" placeholder="Anything to add..."></textarea>
+    </div>
 
     <button type="submit">Submit</button>
   </form>
@@ -29,8 +165,7 @@
       e.preventDefault();
 
       const formData = new FormData(form);
-      const params = new URLSearchParams(); // ✅ make sure this line exists!
-
+      const params = new URLSearchParams();
       for (const [key, value] of formData.entries()) {
         params.append(key, value);
       }
@@ -38,9 +173,9 @@
       status.innerText = "Submitting...";
 
       try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwn_yHiWpPmGeduqg4AMvhPpWCy1W_1Jh3L397J81NtIkLIjZ4nVvYfVU-DU3gIDjtr/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbyy739pYU2Cbm3kWQ3MtkJn9buQqhpaY4lvFkYyAImPSWrC6wrBT_5OKh0um3Fza8Wv/exec", {
           method: "POST",
-          body: params,
+          body: params
         });
 
         const text = await response.text();
@@ -53,6 +188,6 @@
       }
     });
   </script>
+
 </body>
 </html>
-
