@@ -29,10 +29,11 @@
       e.preventDefault();
 
       const formData = new FormData(form);
-      const data = {};
-      formData.forEach((value, key) => (data[key] = value));
+      const params = new URLSearchParams(); // ✅ make sure this line exists!
 
-      console.log("Sending data:", data);
+      for (const [key, value] of formData.entries()) {
+        params.append(key, value);
+      }
 
       status.innerText = "Submitting...";
 
